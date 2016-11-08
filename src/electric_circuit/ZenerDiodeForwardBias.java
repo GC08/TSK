@@ -17,7 +17,7 @@ public class ZenerDiodeForwardBias extends ElectricElement{
 	
 	@Override
 	public double IF() {
-		return this.Is *(Math.exp(this.q * this.U)/(this.k - this.T) - 1);
+		return this.Is *(Math.exp((this.q * this.U)/(this.k - this.T)) - 1);
 	}
 
 	@Override
