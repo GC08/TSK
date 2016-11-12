@@ -4,7 +4,7 @@ public abstract class DiodePN extends ElectricElement{
 	protected double U;
 	protected double mUt;
 	protected double Is;
-	protected double R;
+	protected double R = 1;
 	protected double IFmax;
 	
 	public DiodePN(double U) {
@@ -18,7 +18,19 @@ public abstract class DiodePN extends ElectricElement{
 
 	@Override
 	public double UF() {
-		return IF()*this.R;
+		return U - (this.IF() * this.R);
+	}
+	
+	public double getIS(){
+		return this.Is;
+	}
+	
+	public double getmUt(){
+		return this.mUt;
+	}
+	
+	public double getIFMax(){
+		return this.IFmax;
 	}
 
 }
