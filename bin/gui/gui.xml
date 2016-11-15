@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane fx:id="guiContent" prefHeight="200" prefWidth="320"
+	xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="gui.GuiController">
+	<children>
+		<Button fx:id="goToDiode" 
+			onAction="#handleButtonAction" prefHeight="28.0" prefWidth="125.0"
+			text="Diode" textFill="#115b0c">
+			<font>
+				<Font name="DejaVu Serif Bold" size="14.0" />
+			</font>
+		</Button>
+	</children>
+</AnchorPane>

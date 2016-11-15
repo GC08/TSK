@@ -4,8 +4,9 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		int choose = 0;
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 
 		while ((choose != 1) && (choose != 2)) {
@@ -21,10 +22,10 @@ public class Main {
 
 		switch (choose) {
 		case 1:
-			diode = new DiodeSi(U);
+			diode = new DiodeSi();
 			break;
 		case 2:
-			diode = new DiodeGe(U);
+			diode = new DiodeGe();
 			break;
 		}
 		
@@ -32,8 +33,8 @@ public class Main {
 		System.out.println("Is" + diode.getIS() + " A");
 		System.out.println("mUt" + diode.getmUt() + " V");
 		System.out.println("Parametry wyjśćiowe:");
-		System.out.println("If" + diode.IF() + " A");
-		System.out.println("Uf" + diode.UF() + " V");
+		System.out.println("If" + diode.IF(0.7) + " A");
+		System.out.println("Uf" + diode.UF(0.7) + " V");
 	}
 
 }

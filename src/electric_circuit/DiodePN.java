@@ -1,24 +1,21 @@
 package electric_circuit;
 
-public abstract class DiodePN extends ElectricElement{
+public abstract class DiodePN{
 	protected double U;
 	protected double mUt;
 	protected double Is;
 	protected double R = 1;
 	protected double IFmax;
 	
-	public DiodePN(double U) {
-		this.U = U;
+	public DiodePN() {
 	}
 	
-	@Override
-	public double IF() {
-		return this.Is *(Math.exp(this.U/this.mUt) - 1);
+	public double IF(double U) {
+		return this.Is *(Math.exp(U/this.mUt) - 1);
 	}
 
-	@Override
-	public double UF() {
-		return U - (this.IF() * this.R);
+	public double UF(double U) {
+		return U - (this.IF(U) * this.R);
 	}
 	
 	public double getIS(){

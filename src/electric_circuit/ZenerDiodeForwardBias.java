@@ -1,6 +1,6 @@
 package electric_circuit;
 
-public class ZenerDiodeForwardBias extends ElectricElement{
+public class ZenerDiodeForwardBias{
 
 	private double U;
 	private double I;
@@ -15,12 +15,10 @@ public class ZenerDiodeForwardBias extends ElectricElement{
 		this.I = I;
 	}
 	
-	@Override
 	public double IF() {
 		return this.Is *(Math.exp((this.q * this.U)/(this.k - this.T)) - 1);
 	}
 
-	@Override
 	public double UF() {
 		return U - deltaU;
 	}
