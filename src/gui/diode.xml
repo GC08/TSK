@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.chart.*?>
+
+<AnchorPane fx:id="guiContent" xmlns="http://javafx.com/javafx/8.0.40"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DiodeController">
+	<children>
+		<Button fx:id="button" layoutX="171.0" layoutY="158.0"
+			onAction="#handleButtonAction" prefHeight="28.0" prefWidth="125.0"
+			text="Click Me!" textFill="#115b0c">
+			<font>
+				<Font name="DejaVu Serif Bold" size="14.0" />
+			</font>
+		</Button>
+
+		<Label fx:id="label" layoutX="20.0" layoutY="62.0" minHeight="16"
+			minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+
+		<Circle fx:id="kolko" fill="red" layoutX="94.0" layoutY="142.0"
+			radius="30" />
+
+		<TextField fx:id="poleTekstowe" layoutX="20.0" layoutY="26.0"
+			prefHeight="26.0" prefWidth="276.0" promptText="wpisz coś" />
+
+		<LineChart fx:id="lc" layoutX="500" layoutY="500"
+			prefHeight="330.0" prefWidth="580.0" animated="true">
+			<xAxis>
+				<CategoryAxis side="BOTTOM" />
+			</xAxis>
+			
+			<yAxis>
+				<NumberAxis side="LEFT" />
+			</yAxis>
+		</LineChart>
+	</children>
+</AnchorPane>
