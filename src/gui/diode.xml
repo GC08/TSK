@@ -31,9 +31,9 @@
 			prefHeight="26.0" prefWidth="276.0" promptText="wpisz coś" />
 
 		<LineChart fx:id="lc" layoutX="500" layoutY="500"
-			prefHeight="330.0" prefWidth="580.0" animated="true">
+			prefHeight="330.0" prefWidth="580.0" animated="false">
 			<xAxis>
-				<CategoryAxis side="BOTTOM" />
+				<NumberAxis side="BOTTOM" />
 			</xAxis>
 			
 			<yAxis>
