@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.chart.*?>
+<?import gui.NumberTextField?>
+
+<AnchorPane fx:id="guiContent" xmlns="http://javafx.com/javafx/8.0.40"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RLCController">
+	<HBox>
+		<VBox>
+			<Button fx:id="pauseBtn" onAction="#pauseAction" prefHeight="28.0"
+				prefWidth="125.0" text="Pauza" textFill="#115b0c">
+				<font>
+					<Font name="DejaVu Serif Bold" size="14.0" />
+				</font>
+			</Button>
+
+			<Label text="napięcie wejśćiowe/amplituda" fx:id="labelU"
+				minHeight="16" minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+			<NumberTextField fx:id="uInTF" prefHeight="26.0"
+				prefWidth="276.0" promptText="podaj napięcie" />
+
+			<Label text="częstotliwość" fx:id="labelFreq" minHeight="16"
+				minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+			<NumberTextField fx:id="freqTF" prefHeight="26.0"
+				prefWidth="276.0" promptText="podaj częstotliwość" />
+
+			<Label text="opór źródła" fx:id="labelRwe" minHeight="16"
+				minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+			<NumberTextField fx:id="rweTF" prefHeight="26.0"
+				prefWidth="276.0" promptText="podaj opoór" />
+
+			<Label text="opór opornika" fx:id="labelR" minHeight="16"
+				minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+			<NumberTextField fx:id="rTF" prefHeight="26.0"
+				prefWidth="276.0" promptText="podaj opoór" />
+
+			<Label text="pojemność kondensatora" fx:id="labelC" minHeight="16"
+				minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+			<NumberTextField fx:id="cTF" prefHeight="26.0"
+				prefWidth="276.0" promptText="podaj pojemność" />
+
+			<Label text="indukcyjność cewki" fx:id="labelL" minHeight="16"
+				minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+			<NumberTextField fx:id="lTF" prefHeight="26.0"
+				prefWidth="276.0" promptText="podaj indukcyjność" />
+
+			<Button fx:id="updateBtn" onAction="#updateAction" prefHeight="28.0"
+				prefWidth="125.0" text="Aktualizuj" textFill="#115b0c">
+				<font>
+					<Font name="DejaVu Serif Bold" size="14.0" />
+				</font>
+			</Button>
+
+			<Label text="znaleziona częstotliwość rezonansowa" fx:id="labelRezFreq"
+				minHeight="16" minWidth="69" prefHeight="26.0" prefWidth="276.0" />
+			<Label text="" fx:id="rezFreq" minHeight="16" minWidth="69"
+				prefHeight="26.0" prefWidth="276.0" />
+
+			<ImageView id="boxImage" .>
+				<image>
+					<Image url="@images/rlc.jpg" />
+				</image>
+			</ImageView>
+		</VBox>
+
+		<VBox>
+			<LineChart fx:id="lcGain" prefHeight="330.0" prefWidth="580.0"
+				animated="false">
+				<xAxis>
+					<NumberAxis side="BOTTOM" />
+				</xAxis>
+
+				<yAxis>
+					<NumberAxis side="LEFT" />
+				</yAxis>
+			</LineChart>
+
+			<LineChart fx:id="lcUF" prefHeight="330.0" prefWidth="580.0"
+				animated="false">
+				<xAxis>
+					<NumberAxis side="BOTTOM" />
+				</xAxis>
+
+				<yAxis>
+					<NumberAxis side="LEFT" />
+				</yAxis>
+			</LineChart>
+
+			<LineChart fx:id="lcUSource" prefHeight="330.0" prefWidth="580.0"
+				animated="false">
+				<xAxis>
+					<NumberAxis side="BOTTOM" />
+				</xAxis>
+
+				<yAxis>
+					<NumberAxis side="LEFT" />
+				</yAxis>
+			</LineChart>
+		</VBox>
+	</HBox>
+</AnchorPane>

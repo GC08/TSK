@@ -9,16 +9,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="guiContent" prefHeight="200" prefWidth="320"
+<AnchorPane fx:id="guiContent"
 	xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="gui.GuiController">
-	<children>
+	<VBox>
 		<Button fx:id="goToDiode" 
-			onAction="#handleButtonAction" prefHeight="28.0" prefWidth="125.0"
-			text="Diode" textFill="#115b0c">
+			onAction="#diodeButtonAction" prefHeight="28.0" prefWidth="500.0"
+			text="Diody" textFill="#115b0c">
 			<font>
 				<Font name="DejaVu Serif Bold" size="14.0" />
 			</font>
 		</Button>
-	</children>
+		
+		<Button fx:id="goToRCFilters" 
+			onAction="#rcButtonAction" prefHeight="28.0" prefWidth="500.0"
+			text="Filtry RC" textFill="#115b0c">
+			<font>
+				<Font name="DejaVu Serif Bold" size="14.0" />
+			</font>
+		</Button>
+		
+		<Button fx:id="goToRLFilters" 
+			onAction="#rlButtonAction" prefHeight="28.0" prefWidth="500.0"
+			text="Filtry RL" textFill="#115b0c">
+			<font>
+				<Font name="DejaVu Serif Bold" size="14.0" />
+			</font>
+		</Button>
+		
+		<Button fx:id="goToRLC" 
+			onAction="#rlcButtonAction" prefHeight="28.0" prefWidth="500.0"
+			text="Równoległy układ RLC(filtr pasmowoprzepustowy)" textFill="#115b0c">
+			<font>
+				<Font name="DejaVu Serif Bold" size="14.0" />
+			</font>
+		</Button>
+	</VBox>
 </AnchorPane>

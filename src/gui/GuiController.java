@@ -22,10 +22,40 @@ public class GuiController implements Initializable {
 	private AnchorPane guiContent;
 
 	@FXML
-	private void handleButtonAction(ActionEvent event) throws IOException {
+	private void diodeButtonAction(ActionEvent event) throws IOException {
 		Stage stage = new Stage();
-		stage.setTitle("Diode");
+		stage.setTitle("Diody");
 		Pane myPane = FXMLLoader.load(getClass().getResource("diode.xml"));
+		Scene scene = new Scene(myPane);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	@FXML
+	private void rcButtonAction(ActionEvent event) throws IOException {
+		Stage stage = new Stage();
+		stage.setTitle("Filtry RC");
+		Pane myPane = FXMLLoader.load(getClass().getResource("rcFilters.xml"));
+		Scene scene = new Scene(myPane);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	@FXML
+	private void rlButtonAction(ActionEvent event) throws IOException {
+		Stage stage = new Stage();
+		stage.setTitle("Filtry RL");
+		Pane myPane = FXMLLoader.load(getClass().getResource("rlFilters.xml"));
+		Scene scene = new Scene(myPane);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	@FXML
+	private void rlcButtonAction(ActionEvent event) throws IOException {
+		Stage stage = new Stage();
+		stage.setTitle("Układ RLC");
+		Pane myPane = FXMLLoader.load(getClass().getResource("rlc.xml"));
 		Scene scene = new Scene(myPane);
 		stage.setScene(scene);
 		stage.show();
