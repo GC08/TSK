@@ -24,27 +24,53 @@ public class VoltageSource {
 		return 0;
 	}
 
+	public void setU(double U) {
+		this.U = U;
+	}
+
+	public void setOffset(double offset) {
+		this.Offset = offset;
+	}
+
+	public void setFrequency(double freq) {
+		this.Frequency = freq;
+	}
+	
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	public double U(double time) {
-		if(U == 0){
+		if (U == 0) {
 			return 0;
 		}
 		
-		double sinValue = Math.sin(2*Math.PI * time * this.Frequency);
-		
+		double USource = 0;
+
 		switch (this.type) {
 		case SINUS:
-			return sinValue * this.U + this.Offset;
+			USource = Math.sin(2 * Math.PI * time * this.Frequency) * this.U + this.Offset;
+			break;
 		case TRIANGULAR:
-			double multipler = 1;
-			
-			if(sinValue > 0){
-				 multipler =  sinValue / Math.abs(sinValue);
+			time += 0.25;
+			double faze = (time * this.Frequency) % 1.0;
+
+			if (faze <= 0.5) {
+				USource = 4 * this.U * (faze - 0.25);
+			}else{
+
+				USource = 4 * this.U * (0.75 - faze);
 			}
 			
-			return  0;
+			break;
+		case DIRECT:
+			USource = U;
+			break;
 		default:
 			return 0;
 		}
+		
+		return USource + this.Offset;
 	}
 
 	public enum Type {
