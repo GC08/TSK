@@ -14,10 +14,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class RLFilterController implements Initializable {
 	private Boolean run = true;
-	private RLFilter filter = new LowPassRLFilter(1,1,1,1);
+	private RLFilter filter = new LowPassRLFilter(1, 1, 1, 1);
 	private ArrayList sourceVoltage = new ArrayList<Double>();
 	private ArrayList forwardVoltage = new ArrayList<Double>();
 	private ArrayList gain = new ArrayList<Double>();
@@ -41,6 +43,8 @@ public class RLFilterController implements Initializable {
 	private ToggleGroup sourceType;
 	@FXML
 	private Label limitFreq;
+	@FXML
+	private ImageView imageView;
 
 	@FXML
 	private void pauseAction(ActionEvent event) throws InterruptedException {
@@ -61,13 +65,17 @@ public class RLFilterController implements Initializable {
 	@FXML
 	private void selectLowPassAction(ActionEvent event) throws InterruptedException {
 		filter = new LowPassRLFilter(freqTF.getValue(), uInTF.getValue(), rTF.getValue(), lTF.getValue());
-		limitFreq.setText(""+filter.getLimitFreq());
+		limitFreq.setText("" + filter.getLimitFreq());
+		Image image = new Image("file:src/gui/images/RL_low_pass.png");
+		imageView.setImage(image);
 	}
-	
+
 	@FXML
 	private void selectHighPassAction(ActionEvent event) throws InterruptedException {
 		filter = new HighPassRLFilter(freqTF.getValue(), uInTF.getValue(), rTF.getValue(), lTF.getValue());
-		limitFreq.setText(""+filter.getLimitFreq());
+		limitFreq.setText("" + filter.getLimitFreq());
+		Image image = new Image("file:src/gui/images/RL_high_pass.png");
+		imageView.setImage(image);
 	}
 
 	private void updateInput() {
@@ -75,7 +83,7 @@ public class RLFilterController implements Initializable {
 		filter.setUin(uInTF.getValue());
 		filter.setR(rTF.getValue());
 		filter.setL(lTF.getValue());
-		limitFreq.setText(""+filter.getLimitFreq());
+		limitFreq.setText("" + filter.getLimitFreq());
 	}
 
 	@Override
@@ -85,7 +93,7 @@ public class RLFilterController implements Initializable {
 		uInTF.setText("1");
 		rTF.setText("1");
 		lTF.setText("1");
-		limitFreq.setText(""+filter.getLimitFreq());
+		limitFreq.setText("" + filter.getLimitFreq());
 
 		Task task = new Task<Void>() {
 			@Override

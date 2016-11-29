@@ -14,6 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class RCFilterController implements Initializable {
 	private Boolean run = true;
@@ -41,6 +43,8 @@ public class RCFilterController implements Initializable {
 	private ToggleGroup sourceType;
 	@FXML
 	private Label limitFreq;
+	@FXML
+	private ImageView imageView;
 
 	@FXML
 	private void pauseAction(ActionEvent event) throws InterruptedException {
@@ -62,12 +66,16 @@ public class RCFilterController implements Initializable {
 	private void selectLowPassAction(ActionEvent event) throws InterruptedException {
 		filter = new LowPassRCFilter(freqTF.getValue(), uInTF.getValue(), rTF.getValue(), cTF.getValue());
 		limitFreq.setText(""+filter.getLimitFreq());
+		Image image = new Image("file:src/gui/images/RC_low_pass.png");
+        imageView.setImage(image);
 	}
 	
 	@FXML
 	private void selectHighPassAction(ActionEvent event) throws InterruptedException {
 		filter = new HighPassRCFilter(freqTF.getValue(), uInTF.getValue(), rTF.getValue(), cTF.getValue());
 		limitFreq.setText(""+filter.getLimitFreq());
+		Image image = new Image("file:src/gui/images/RC_high_pass.png");
+		imageView.setImage(image);
 	}
 
 	private void updateInput() {
