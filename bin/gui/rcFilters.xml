@@ -2,6 +2,7 @@
  
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -15,6 +16,14 @@
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RCFilterController">
 	<HBox>
 		<VBox>
+				<ImageView fx:id="imageView" layoutX="29.0" layoutY="44.0"
+					fitHeight="300.0" fitWidth="500.0" pickOnBounds="true"
+					preserveRatio="true">
+					<image>
+						<Image url="file:src/gui/images/RC_low_pass.png" />
+					</image>
+				</ImageView>
+		
 			<Button fx:id="pauseBtn" onAction="#pauseAction" prefHeight="28.0"
 				prefWidth="125.0" text="Pauza" textFill="#115b0c">
 				<font>
