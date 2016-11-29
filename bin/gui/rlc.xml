@@ -2,6 +2,7 @@
  
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.image.* ?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -15,6 +16,15 @@
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.RLCController">
 	<HBox>
 		<VBox>
+			<ImageView fx:id="imageView" layoutX="29.0" layoutY="44.0"
+				fitHeight="224.0" fitWidth="400.0" pickOnBounds="true"
+				preserveRatio="true">
+				<image>
+					<Image
+						url="http://collider.com/wp-content/uploads/lego-batman-movie-dc-super-heroes-unite-1.jpg" />
+				</image>
+			</ImageView>
+			
 			<Button fx:id="pauseBtn" onAction="#pauseAction" prefHeight="28.0"
 				prefWidth="125.0" text="Pauza" textFill="#115b0c">
 				<font>
@@ -63,12 +73,6 @@
 				minHeight="16" minWidth="69" prefHeight="26.0" prefWidth="276.0" />
 			<Label text="" fx:id="rezFreq" minHeight="16" minWidth="69"
 				prefHeight="26.0" prefWidth="276.0" />
-
-			<ImageView id="boxImage" .>
-				<image>
-					<Image url="@images/rlc.jpg" />
-				</image>
-			</ImageView>
 		</VBox>
 
 		<VBox>
