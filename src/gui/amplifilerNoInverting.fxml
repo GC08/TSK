@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AmplifilerNoInvertingController">
+   <children>
+      <Label layoutX="19.0" layoutY="97.0" text="opór pierwszy" />
+      <Label layoutX="24.0" layoutY="33.0" text="napięcie wejściowe" />
+      <Button layoutX="73.0" layoutY="236.0" mnemonicParsing="false" onAction="#updateInput" text="Aktualizuj" />
+      <ImageView fx:id="imageTransistor" fitHeight="476.0" fitWidth="525.0" layoutX="211.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/Noniverting_amplifiler_Without_R.png" />
+         </image></ImageView>
+      <Label fx:id="Uin2" layoutX="271.0" layoutY="196.0" text="12,345">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="Uout" layoutX="585.0" layoutY="275.0" text="0,123">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="R22" layoutX="452.0" layoutY="338.0" text="12,345">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="R11" layoutX="308.0" layoutY="338.0" text="12,345">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Slider fx:id="UinSlider" layoutX="20.0" layoutY="64.0" max="20.0" min="5.0" />
+      <Slider fx:id="R1Slider" layoutX="20.0" layoutY="128.0" max="30.0" min="10.0" />
+      <Label fx:id="Uin" layoutX="168.0" layoutY="63.0" text="UIn" />
+      <Label fx:id="R1" layoutX="169.0" layoutY="127.0" text="R1" />
+      <Label layoutX="327.0" layoutY="196.0" text="V">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="16.0" layoutY="157.0" text="opór drugi" />
+      <Slider fx:id="R2Slider" layoutX="17.0" layoutY="188.0" max="30.0" min="10.0" />
+      <Label fx:id="R2" layoutX="166.0" layoutY="187.0" text="R2" />
+      <Label layoutX="272.0" layoutY="338.0" text="R1:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="419.0" layoutY="338.0" text="R2:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="367.0" layoutY="338.0" text="Ω">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="511.0" layoutY="338.0" text="Ω">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

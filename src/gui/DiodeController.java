@@ -15,34 +15,38 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class DiodeController implements Initializable {
 
 	@FXML
-	private LineChart<Number, Number> lcUSource;
-	private Boolean run = true;
-	private VoltageSource source = new VoltageSource(0.44, VoltageSource.Type.TRIANGULAR, 0, 0.25);
-	private DiodePN diode = new DiodeGe();
-	private ArrayList sourceVoltage = new ArrayList<Double>();
-	private ArrayList forwardVoltage = new ArrayList<Double>();
-	private ArrayList forwardCurrent = new ArrayList<Double>();
+	public LineChart<Number, Number> lcUSource;
+	public Boolean run = true;
+	public VoltageSource source = new VoltageSource(0.44, VoltageSource.Type.TRIANGULAR, 0, 0.25);
+	public DiodePN diode = new DiodeGe();
+	public ArrayList<Double> sourceVoltage = new ArrayList<Double>();
+	public ArrayList<Double> forwardVoltage = new ArrayList<Double>();
+	public ArrayList<Double> forwardCurrent = new ArrayList<Double>();
 	@FXML
-	private LineChart<Number, Number> lcIF;
+	public LineChart<Number, Number> lcIF;
 	@FXML
-	private LineChart<Number, Number> lcUF;
+	public LineChart<Number, Number> lcUF;
 	@FXML
-	private Button pauseBtn;
+	public Button pauseBtn;
 	@FXML
-	private NumberTextField offsetTF;
+	public TextField offsetTF;
 	@FXML
-	private NumberTextField uInTF;
+	public TextField uInTF;
 	@FXML
-	private NumberTextField freqTF;
+	public TextField freqTF;
 	@FXML
-	private ToggleGroup sourceType;
+	public ToggleGroup sourceType;
+        @FXML
+        public ImageView imageDiode;
 
 	@FXML
-	private void pauseAction(ActionEvent event) throws InterruptedException {
+	public void pauseAction(ActionEvent event) throws InterruptedException {
 		if (run) {
 			pauseBtn.setText("Wznów");
 			run = false;
@@ -53,112 +57,113 @@ public class DiodeController implements Initializable {
 	}
 
 	@FXML
-	private void updateAction(ActionEvent event) throws InterruptedException {
+	public void updateAction(ActionEvent event) throws InterruptedException {
 		updateInput();
 	}
 	
 	@FXML
-	private void selectTriangulateAction(ActionEvent event) throws InterruptedException {
+	public void selectTriangulateAction(ActionEvent event) throws InterruptedException {
 		source = new VoltageSource(0.44, VoltageSource.Type.TRIANGULAR, 0, 0.25);
 		updateInput();
 	}
 	
 	@FXML
-	private void selectSinusAction(ActionEvent event) throws InterruptedException {
+	public void selectSinusAction(ActionEvent event) throws InterruptedException {
 		source = new VoltageSource(0.44, VoltageSource.Type.SINUS, 0, 0.25);
 		updateInput();
 	}
 	
 	@FXML
-	private void selectDirectAction(ActionEvent event) throws InterruptedException {
+	public void selectDirectAction(ActionEvent event) throws InterruptedException {
 		source = new VoltageSource(0.44, VoltageSource.Type.DIRECT);
 		updateInput();
 	}
 	
 	@FXML
-	private void selectGeAction(ActionEvent event) throws InterruptedException {
-		diode = new DiodeGe();
+	public void selectGeAction(ActionEvent event) throws InterruptedException {
+		diode = new DiodeGe();   
 	}
 	
 	@FXML
-	private void selectSiAction(ActionEvent event) throws InterruptedException {
+	public void selectSiAction(ActionEvent event) throws InterruptedException {
 		diode = new DiodeSi();
 	}
 	
 
-	private void updateInput() {
-		source.setFrequency(freqTF.getValue());
-		source.setOffset(offsetTF.getValue());
-		source.setU(uInTF.getValue());
+	public void updateInput() {
+		source.setFrequency(Double.parseDouble(freqTF.getText()));
+		source.setOffset(Double.parseDouble(offsetTF.getText()));
+		source.setU(Double.parseDouble(uInTF.getText()));
 	}
-
+        
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		initializeGraphs();
-		uInTF.setText("0.44");
-		offsetTF.setText("0");
-		freqTF.setText("0.25");
+            Image img = new Image("file:src/gui/img/Diode.png");
+            imageDiode.setImage(img);
+            initializeGraphs();
+            uInTF.setText("0.44");
+            offsetTF.setText("0");
+            freqTF.setText("0.25");
 
-		Task task = new Task<Void>() {
-			@Override
-			public Void call() throws Exception {
-				double time = 0;
-				while (true) {
-					if (run) {
-						time += 0.025;
-					}
+            Task task = new Task<Void>() {
+                    @Override
+            public Void call() throws Exception {
+                            double time = 0;
+                            while (true) {
+                                    if (run) {
+                                        time += 0.025;
+                                    }
 
-					final double finalTime = time;
-					Platform.runLater(new Runnable() {
-						@Override
-						public void run() {
-							try {
-								updateGraphs(finalTime);
-							} catch (InterruptedException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
+                                    final double finalTime = time;
+                                    Platform.runLater(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                    try {
+                                                            updateGraphs(finalTime);
+                                                    } catch (InterruptedException e) {
+                                                            // TODO Auto-generated catch block
+                                                            e.printStackTrace();
+                                                    }
+                                            }
 
-					});
-					Thread.sleep(25);
-				}
-			}
-		};
-		Thread th = new Thread(task);
-		th.setDaemon(true);
-		th.start();
+                                    });
+                                    Thread.sleep(25);
+                            }
+                    }
+            };
+            Thread th = new Thread(task);
+            th.setDaemon(true);
+            th.start();
 	}
 
-	private void initializeGraphs() {
+	public void initializeGraphs() {
 		initializeGraph(lcIF, forwardCurrent, "Forward Current", "Current");
 		initializeGraph(lcUF, forwardVoltage, "Forward Voltage", "Voltage");
 		initializeGraph(lcUSource, sourceVoltage, "Sourrce Voltage", "Voltage");
 	}
 
-	private void initializeGraph(LineChart<Number, Number> lc, ArrayList sourceList, String title, String label) {
-		for (int i = 0; i < 200; i++) {
-			sourceList.add(0);
-		}
-
-		lc.getXAxis().setAutoRanging(true);
-		lc.getYAxis().setAutoRanging(true);
-		lc.setCreateSymbols(false);
-		lc.setTitle(title);
-		XYChart.Series series = new XYChart.Series();
-		series.setName(label);
-		serieFromList(series, sourceList);
-		lc.getData().add(0, series);
+	public void initializeGraph(LineChart<Number, Number> lc, ArrayList sourceList, String title, String label) {
+            for (int i = 0; i < 200; i++) {
+                    sourceList.add(0);
+            }
+            lc.getXAxis().setAutoRanging(true);
+            lc.getYAxis().setAutoRanging(true);
+            lc.setCreateSymbols(false);
+            lc.setTitle(title);
+            XYChart.Series series = new XYChart.Series();
+            series.setName(label);
+            serieFromList(series, sourceList);
+            lc.getData().add(0, series);
 
 	}
 
-	private void serieFromList(Series series, ArrayList list) {
+	public void serieFromList(Series series, ArrayList list) {
 		for (int i = 0; i < list.size(); i++) {
 			series.getData().add(new XYChart.Data(i, list.get(i)));
 		}
 	}
 
-	protected void updateGraphs(double time) throws InterruptedException {
+	public void updateGraphs(double time) throws InterruptedException {
 		if (run) {
 			double Uin = source.U(time);
 			sourceVoltage.remove(0);
@@ -173,11 +178,12 @@ public class DiodeController implements Initializable {
 		}
 	}
 
-	private void updateGraph(LineChart<Number, Number> lc, ArrayList sourceArray, String label) {
-		XYChart.Series series = new XYChart.Series();
-		series.setName(label);
-		serieFromList(series, sourceArray);
-		lc.getData().set(0, series);
+	public void updateGraph(LineChart<Number, Number> lc, ArrayList sourceArray, String label) {
+            
+            XYChart.Series series = new XYChart.Series();
+            series.setName(label);
+            serieFromList(series, sourceArray);
+            lc.getData().set(0, series);
 	}
 
 }

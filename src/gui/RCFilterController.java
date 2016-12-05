@@ -18,36 +18,36 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class RCFilterController implements Initializable {
-	private Boolean run = true;
-	private RCFilter filter = new LowPassRCFilter(1,1,1,1);
-	private ArrayList sourceVoltage = new ArrayList<Double>();
-	private ArrayList forwardVoltage = new ArrayList<Double>();
-	private ArrayList gain = new ArrayList<Double>();
+	public Boolean run = true;
+	public RCFilter filter = new LowPassRCFilter(1,1,1,1);
+	public ArrayList<Double> sourceVoltage = new ArrayList<Double>();
+	public ArrayList<Double> forwardVoltage = new ArrayList<Double>();
+	public ArrayList<Double> gain = new ArrayList<Double>();
 	@FXML
-	private LineChart<Number, Number> lcGain;
+	public LineChart<Number, Number> lcGain;
 	@FXML
-	private LineChart<Number, Number> lcUF;
+	public LineChart<Number, Number> lcUF;
 	@FXML
-	private LineChart<Number, Number> lcUSource;
+	public LineChart<Number, Number> lcUSource;
 	@FXML
-	private Button pauseBtn;
+	public Button pauseBtn;
 	@FXML
-	private NumberTextField rTF;
+	public TextField rTF;
 	@FXML
-	private NumberTextField cTF;
+	public TextField cTF;
 	@FXML
-	private NumberTextField uInTF;
+	public TextField uInTF;
 	@FXML
-	private NumberTextField freqTF;
+	public TextField freqTF;
 	@FXML
-	private ToggleGroup sourceType;
+	public ToggleGroup sourceType;
 	@FXML
-	private Label limitFreq;
-	@FXML
-	private ImageView imageView;
+	public Label limitFreq;
+        @FXML
+        public ImageView imageRC;
 
 	@FXML
-	private void pauseAction(ActionEvent event) throws InterruptedException {
+	public void pauseAction(ActionEvent event) throws InterruptedException {
 		if (run) {
 			pauseBtn.setText("Wznów");
 			run = false;
@@ -58,37 +58,47 @@ public class RCFilterController implements Initializable {
 	}
 
 	@FXML
-	private void updateAction(ActionEvent event) throws InterruptedException {
+	public void updateAction(ActionEvent event) throws InterruptedException {
 		updateInput();
 	}
 
 	@FXML
-	private void selectLowPassAction(ActionEvent event) throws InterruptedException {
-		filter = new LowPassRCFilter(freqTF.getValue(), uInTF.getValue(), rTF.getValue(), cTF.getValue());
-		limitFreq.setText(""+filter.getLimitFreq());
-		Image image = new Image("file:src/gui/images/RC_low_pass.png");
-        imageView.setImage(image);
+	public void selectLowPassAction(ActionEvent event) throws InterruptedException {
+            Image img = new Image("file:src/gui/img/RC_low_pass.png");
+            imageRC.setImage(img);
+            filter = new LowPassRCFilter(
+                        Double.parseDouble(freqTF.getText()), 
+                        Double.parseDouble(uInTF.getText()), 
+                        Double.parseDouble(rTF.getText()), 
+                        Double.parseDouble(cTF.getText()));
+            limitFreq.setText(""+filter.getLimitFreq());
 	}
 	
 	@FXML
-	private void selectHighPassAction(ActionEvent event) throws InterruptedException {
-		filter = new HighPassRCFilter(freqTF.getValue(), uInTF.getValue(), rTF.getValue(), cTF.getValue());
-		limitFreq.setText(""+filter.getLimitFreq());
-		Image image = new Image("file:src/gui/images/RC_high_pass.png");
-		imageView.setImage(image);
+	public void selectHighPassAction(ActionEvent event) throws InterruptedException {
+            Image img = new Image("file:src/gui/img/RC_high_pass.png");
+            imageRC.setImage(img);
+            filter = new HighPassRCFilter(
+                    Double.parseDouble(freqTF.getText()), 
+                    Double.parseDouble(uInTF.getText()), 
+                    Double.parseDouble(rTF.getText()), 
+                    Double.parseDouble(cTF.getText()));
+            limitFreq.setText(""+filter.getLimitFreq());
 	}
 
-	private void updateInput() {
-		filter.setFreq(freqTF.getValue());
-		filter.setUin(uInTF.getValue());
-		filter.setR(rTF.getValue());
-		filter.setC(cTF.getValue());
+	public void updateInput() {
+		filter.setFreq(Double.parseDouble(freqTF.getText()));
+		filter.setUin(Double.parseDouble(uInTF.getText()));
+		filter.setR(Double.parseDouble(rTF.getText()));
+		filter.setC(Double.parseDouble(cTF.getText()));
 		limitFreq.setText(""+filter.getLimitFreq());
 	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		initializeGraphs();
+		Image img = new Image("file:src/gui/img/RC_low_pass.png");
+                imageRC.setImage(img);
+                initializeGraphs();
 		freqTF.setText("1");
 		uInTF.setText("1");
 		rTF.setText("1");
@@ -126,13 +136,13 @@ public class RCFilterController implements Initializable {
 		th.start();
 	}
 
-	private void initializeGraphs() {
+	public void initializeGraphs() {
 		initializeGraph(lcGain, gain, "Wzmocnienie", "Wzmocnienie");
 		initializeGraph(lcUF, forwardVoltage, "Forward Voltage", "Voltage");
 		initializeGraph(lcUSource, sourceVoltage, "Sourrce Voltage", "Voltage");
 	}
 
-	private void initializeGraph(LineChart<Number, Number> lc, ArrayList sourceList, String title, String label) {
+	public void initializeGraph(LineChart<Number, Number> lc, ArrayList sourceList, String title, String label) {
 		for (int i = 0; i < 200; i++) {
 			sourceList.add(0);
 		}
@@ -148,15 +158,15 @@ public class RCFilterController implements Initializable {
 
 	}
 
-	private void serieFromList(Series series, ArrayList list) {
+	public void serieFromList(Series series, ArrayList list) {
 		for (int i = 0; i < list.size(); i++) {
 			series.getData().add(new XYChart.Data(i, list.get(i)));
 		}
 	}
 
-	protected void updateGraphs(double time) throws InterruptedException {
+	public void updateGraphs(double time) throws InterruptedException {
 		if (run) {
-			double Uin = uInTF.getValue();
+			double Uin = Double.parseDouble(uInTF.getText());
 			sourceVoltage.remove(0);
 			sourceVoltage.add(Uin);
 			updateGraph(lcUSource, sourceVoltage, "Voltage");
@@ -169,7 +179,7 @@ public class RCFilterController implements Initializable {
 		}
 	}
 
-	private void updateGraph(LineChart<Number, Number> lc, ArrayList sourceArray, String label) {
+	public void updateGraph(LineChart<Number, Number> lc, ArrayList sourceArray, String label) {
 		XYChart.Series series = new XYChart.Series();
 		series.setName(label);
 		serieFromList(series, sourceArray);

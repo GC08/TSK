@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DiodeController">
+   <children>
+      <Button fx:id="pauseBtn" layoutX="205.0" layoutY="243.0" mnemonicParsing="false" onAction="#pauseAction" text="Pause" />
+      <RadioButton layoutX="26.0" layoutY="28.0" mnemonicParsing="false" onAction="#selectSiAction" text="dioda krzemowa">
+         <toggleGroup>
+            <ToggleGroup fx:id="Filtr_Type" />
+         </toggleGroup></RadioButton>
+      <RadioButton layoutX="26.0" layoutY="53.0" mnemonicParsing="false" onAction="#selectGeAction" selected="true" text="dioda germanowa" toggleGroup="$Filtr_Type" />
+      <Label layoutX="189.0" layoutY="28.0" text="napięcie wejściowe/amplitudowe" />
+      <Label layoutX="189.0" layoutY="96.0" text="offset" />
+      <Label layoutX="189.0" layoutY="146.0" text="częstotliwość" />
+      <RadioButton layoutX="26.0" layoutY="115.0" mnemonicParsing="false" onAction="#selectSinusAction" text="przebieg sinusoidalny">
+         <toggleGroup>
+            <ToggleGroup fx:id="Voltage_Type" />
+         </toggleGroup></RadioButton>
+      <RadioButton layoutX="26.0" layoutY="169.0" mnemonicParsing="false" onAction="#selectDirectAction" text="prąd stały" toggleGroup="$Voltage_Type" />
+      <RadioButton layoutX="26.0" layoutY="142.0" mnemonicParsing="false" onAction="#selectTriangulateAction" prefHeight="17.0" prefWidth="136.0" selected="true" text="przebieg trójkątny" toggleGroup="$Voltage_Type" />
+      <LineChart fx:id="lcIF" animated="false" layoutX="376.0" layoutY="1.0" prefHeight="215.0" prefWidth="360.0" title="Forward Current">
+        <xAxis>
+          <NumberAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <LineChart fx:id="lcUF" animated="false" layoutX="376.0" layoutY="213.0" prefHeight="215.0" prefWidth="360.0" title="Forward Voltage">
+         <xAxis>
+            <NumberAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <LineChart fx:id="lcUSource" animated="false" layoutX="376.0" layoutY="428.0" prefHeight="215.0" prefWidth="360.0" title="Source Voltage">
+         <xAxis>
+            <NumberAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <Button layoutX="94.0" layoutY="243.0" mnemonicParsing="false" onAction="#updateAction" text="Aktualizuj" />
+      <TextField fx:id="uInTF" layoutX="189.0" layoutY="49.0" promptText="podaj napięcie" />
+      <TextField fx:id="offsetTF" layoutX="189.0" layoutY="113.0" />
+      <TextField fx:id="freqTF" layoutX="189.0" layoutY="163.0" />
+      <ImageView fx:id="imageDiode" fitHeight="330.0" fitWidth="330.0" layoutX="24.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
